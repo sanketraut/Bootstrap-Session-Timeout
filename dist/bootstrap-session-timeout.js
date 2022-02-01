@@ -62,7 +62,11 @@
               </div> \
              </div>');
             $('#session-timeout-dialog-logout').on('click', function() {
-                window.location = opt.logoutUrl;
+                if (typeof opt.onLogout !== 'function') {
+                    window.location = opt.logoutUrl;
+                } else {
+                    opt.onLogout(opt);
+                }
             });            
             $('#session-timeout-dialog').on('hide.bs.modal', function() {                
                 startSessionTimer();
